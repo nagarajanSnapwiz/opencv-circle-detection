@@ -43,9 +43,8 @@ function detectCircles(cv, matSrc) {
     (firstItem, secondItem) => firstItem.center.y - secondItem.center.y
   );
 
-  circles.delete();
   imgMat.delete();
-  return circleArray;
+  return [circleArray, circles];
 }
 
 function loadImage(img) {
@@ -69,5 +68,6 @@ export async function processImage(cv, imgUrl) {
   cv.imshow('detectedCircle', resized);
   console.log('rend', resized);
 
-  const detectedCircled = detectCircles(cv, resized);
+  const [circlesProcessed, circles] = detectCircles(cv, resized);
+  console.log('circs', { circlesProcessed, circles });
 }
