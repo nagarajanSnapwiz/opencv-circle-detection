@@ -48,8 +48,22 @@ function detectCircles(cv, matSrc) {
   return circleArray;
 }
 
-export async function processImage(cv, img) {
+function loadImage(img) {
+  return new Promise((res, reject) => {
+    const image = new Image();
+    image.crossOrigin = 'Anonymous';
+
+    image.onload = () => {
+      res(image);
+    };
+    image.src = img;
+  });
+}
+
+export async function processImage(cv, imgUrl) {
+  const img = await loadImage(imgUrl);
   console.log('img', img);
+
   const matsrc = cv.imread(img);
   const resized = resizeImage(cv, matsrc);
   cv.imshow('detectedCircle', resized);

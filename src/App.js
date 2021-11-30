@@ -26,7 +26,7 @@ export default function App() {
   useEffect(() => {
     if (origImgRef.current) {
       loadImage(selectedFile).then(() => {
-        processImage(cv, origImgRef.current);
+        processImage(cv, selectedFile);
       });
     } else {
       console.log('origImgRef', origImgRef);
