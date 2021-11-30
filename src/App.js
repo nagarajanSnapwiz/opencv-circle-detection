@@ -24,10 +24,12 @@ export default function App() {
   const detectedCirclesCanvasRef = useRef();
 
   useEffect(() => {
-    loadImage(selectedFile).then(() => {
-      processImage(cv, selectedFile);
-    });
-  }, [selectedFile, origImgRef.current]);
+    if (cv) {
+      loadImage(selectedFile).then(() => {
+        processImage(cv, selectedFile);
+      });
+    }
+  }, [selectedFile, origImgRef.current, cv]);
 
   if (!cvLoaded) {
     return <h2>Loading...</h2>;
