@@ -70,7 +70,7 @@ export async function processImage(cv, imgUrl) {
 
   console.log('circs', { circlesProcessed, circles });
   for(const c of circlesProcessed){
-    cv.circle(resized, c.center, c.radius, color,2);
+    cv.circle(resized, c.center, c.radius, green,2);
   }
   cv.imshow('detectedCircle', resized);
 }
