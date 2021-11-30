@@ -1,12 +1,31 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useOpenCv } from 'opencv-react';
+import { processImage } from './process-image';
 import testData from './data.json';
+
+function loadImage(img) {
+  return new Promise((res, reject) => {
+    const image = new Image();
+    image.onload = () => {
+      res();
+    };
+    image.src = img;
+  });
+}
 
 export default function App() {
   const { cv, loaded: cvLoaded } = useOpenCv();
   const [selectedFile, setSelectedFile] = useState(
     'https://cdn.jsdelivr.net/gh/nagarajanSnapwiz/opencv-circle-detection@master/public/images/big1.jpg'
   );
+  const origImgRef = useRef();
+  const detectedCirclesCanvasRef = useRef();
+
+  useEffect(() => {
+    loadImage(selectedFile).then(() => {
+      processImage(cv, origImgRef.current);
+    });
+  }, [selectedFile]);
 
   if (!cvLoaded) {
     return <h2>Loading...</h2>;
@@ -26,7 +45,9 @@ export default function App() {
         </select>
       </div>
       <h2>Original Image </h2>
-      <img src={selectedFile} style={{ maxWidth: '100%' }} />
+      <img src={selectedFile} ref={origImgRef} style={{ maxWidth: '100%' }} />
+      <h2>Detected Circles</h2>
+      <canvas ref={detectedCirclesCanvasRef} id="detectedCircle"></canvas>
     </main>
   );
 }

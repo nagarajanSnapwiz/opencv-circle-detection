@@ -16,7 +16,6 @@ function detectCircles(cv, matSrc) {
   // cv.imshow('workingCanvas', imgMat);
 
   // log('imgMat',imgMat);
-
   let circles = new cv.Mat();
   cv.HoughCircles(imgMat, circles, cv.HOUGH_GRADIENT, 1, 20, 15, 11, 7.5, 15);
   let circleArray = [];
@@ -49,9 +48,12 @@ function detectCircles(cv, matSrc) {
   return circleArray;
 }
 
-export function processImage(cv, img) {
+export async function processImage(cv, img) {
+  console.log('img', img);
   const matsrc = cv.imread(img);
   const resized = resizeImage(cv, matsrc);
+  cv.imshow('detectedCircle', resized);
+  console.log('rend', resized);
+
   const detectedCircled = detectCircles(cv, resized);
-  
 }
