@@ -1,0 +1,10 @@
+[
+  {
+    "name": "big1",
+    "url": "https://cdn.jsdelivr.net/gh/nagarajanSnapwiz/opencv-circle-detection@master/public/images/big1.jpg"
+  },
+  {
+    "name": "small1",
+    "url": "https://cdn.jsdelivr.net/gh/nagarajanSnapwiz/opencv-circle-detection@master/public/images/small1.jpg"
+  }
+]
