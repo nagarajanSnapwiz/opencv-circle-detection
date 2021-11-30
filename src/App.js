@@ -6,6 +6,8 @@ import testData from './data.json';
 function loadImage(img) {
   return new Promise((res, reject) => {
     const image = new Image();
+    image.crossOrigin = 'Anonymous';
+
     image.onload = () => {
       res();
     };
@@ -22,9 +24,11 @@ export default function App() {
   const detectedCirclesCanvasRef = useRef();
 
   useEffect(() => {
-    loadImage(selectedFile).then(() => {
-      processImage(cv, origImgRef.current);
-    });
+    if (origImgRef.current) {
+      loadImage(selectedFile).then(() => {
+        processImage(cv, origImgRef.current);
+      });
+    }
   }, [selectedFile]);
 
   if (!cvLoaded) {
