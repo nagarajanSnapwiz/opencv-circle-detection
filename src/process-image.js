@@ -66,10 +66,10 @@ export async function processImage(cv, imgUrl) {
   const matsrc = cv.imread(img);
   const resized = resizeImage(cv, matsrc);
   const [circlesProcessed, circles] = detectCircles(cv, resized);
-  const green = new cv.Scalar(0, 0, 255);
+  const green = new cv.Scalar(255, 153, 255);
 
   console.log('circs', { circlesProcessed, circles });
-  cv.cvtColor(resized, resized, cv.COLOR_GRAY2RGBA);
+  cv.cvtColor(resized, resized, cv.COLOR_GRAY2RGB);
   for(const c of circlesProcessed){
     cv.circle(resized, c.center, c.radius, green,2);
   }
