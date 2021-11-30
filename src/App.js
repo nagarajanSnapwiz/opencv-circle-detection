@@ -24,13 +24,9 @@ export default function App() {
   const detectedCirclesCanvasRef = useRef();
 
   useEffect(() => {
-    if (origImgRef.current) {
-      loadImage(selectedFile).then(() => {
-        processImage(cv, selectedFile);
-      });
-    } else {
-      console.log('origImgRef', origImgRef);
-    }
+    loadImage(selectedFile).then(() => {
+      processImage(cv, selectedFile);
+    });
   }, [selectedFile, origImgRef.current]);
 
   if (!cvLoaded) {
