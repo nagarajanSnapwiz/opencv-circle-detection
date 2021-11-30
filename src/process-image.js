@@ -34,7 +34,7 @@ function detectCircles(cv, matSrc) {
     let radius = circles.data32F[i * 3 + 2];
     let center = new cv.Point(x, y);
 
-    if (x > averageX - 68) {
+    if (true) {
       circleArray.push({ center: center, radius: radius });
     }
   }
