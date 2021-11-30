@@ -26,25 +26,19 @@ function detectCircles(cv, matSrc) {
     totalX += x;
   }
 
-  const averageX = totalX / circles.cols;
-
   for (let i = 0; i < circles.cols; i++) {
     let x = circles.data32F[i * 3];
     let y = circles.data32F[i * 3 + 1];
     let radius = circles.data32F[i * 3 + 2];
     let center = new cv.Point(x, y);
 
-    if (true) {
-      circleArray.push({ center: center, radius: radius });
-    }
+    circleArray.push({ center: center, radius: radius });
+  
   }
 
-  circleArray.sort(
-    (firstItem, secondItem) => firstItem.center.y - secondItem.center.y
-  );
-
   imgMat.delete();
-  return [circleArray, circles];
+  circles.delete();
+  return circleArray;
 }
 
 function loadImage(img) {
@@ -61,14 +55,11 @@ function loadImage(img) {
 
 export async function processImage(cv, imgUrl) {
   const img = await loadImage(imgUrl);
-  console.log('img', img);
-
   const matsrc = cv.imread(img);
   const resized = resizeImage(cv, matsrc);
-  const [circlesProcessed, circles] = detectCircles(cv, resized);
+  const circlesProcessed =  detectCircles(cv, resized);
   const green = new cv.Scalar(255, 153, 255);
 
-  console.log('circs', { circlesProcessed, circles });
   cv.cvtColor(resized, resized, cv.COLOR_GRAY2RGB);
   for(const c of circlesProcessed){
     cv.circle(resized, c.center, c.radius, green,2);
