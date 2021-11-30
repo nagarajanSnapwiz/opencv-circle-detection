@@ -69,6 +69,7 @@ export async function processImage(cv, imgUrl) {
   const green = new cv.Scalar(0, 0, 255);
 
   console.log('circs', { circlesProcessed, circles });
+  cv.cvtColor(resizedImg, resizedImg, cv.COLOR_GRAY2RGBA);
   for(const c of circlesProcessed){
     cv.circle(resized, c.center, c.radius, green,2);
   }
