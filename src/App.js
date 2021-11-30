@@ -18,7 +18,7 @@ function loadImage(img) {
 export default function App() {
   const { cv, loaded: cvLoaded } = useOpenCv();
   const [selectedFile, setSelectedFile] = useState(
-    'https://cdn.jsdelivr.net/gh/nagarajanSnapwiz/opencv-circle-detection@master/public/images/big11.jpg'
+    'https://cdn.jsdelivr.net/gh/nagarajanSnapwiz/opencv-circle-detection@master/public/images/small1.jpg'
   );
   const origImgRef = useRef();
   const detectedCirclesCanvasRef = useRef();
