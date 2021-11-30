@@ -3,7 +3,7 @@ import { useOpenCv } from 'opencv-react';
 import { processImage } from './process-image';
 import testData from './data.json';
 
-function loadImage(el, img) {
+function loadImage(img) {
   return new Promise((res, reject) => {
     const image = new Image();
     image.crossOrigin = 'Anonymous';
@@ -24,9 +24,13 @@ export default function App() {
   const detectedCirclesCanvasRef = useRef();
 
   useEffect(() => {
-    loadImage(origImgRef.current, selectedFile).then(() => {
-      processImage(cv, origImgRef.current);
-    });
+    if (origImgRef.current) {
+      loadImage(selectedFile).then(() => {
+        processImage(cv, origImgRef.current);
+      });
+    } else {
+      console.log('origImgRef', origImgRef);
+    }
   }, [selectedFile, origImgRef.current]);
 
   if (!cvLoaded) {
